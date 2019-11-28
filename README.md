@@ -12,7 +12,13 @@ Ethereum related code for development of blockchain home IoT.
 2. Install web3 python module.
 
       `pip install web3`
-3. Edit the `kvstore.py` using your favorite IDEs (ie. VSCode).
+3. Open the `kvstore.py` using your favorite IDEs (ie. VSCode).
+4. Change `node_url` to your node (with contract deployed) url/ip.
+
+            node_url = "<url>"
+5. Change the contract address as following:
+
+            address = web3.toChecksumAddress('<contract-address>')
 ### Solidity program (smart contract)
 Use [remix-ide](http://remix.ethereum.org/) which comes with compiler and deploy feature to ethereum node. It is recommended to disable https if you want to deploy to a rpc port of an ethereum node.
 If you wish to run remix-ide locally, please refer to remix-ide [repo](https://github.com/ethereum/remix-ide).
