@@ -37,7 +37,7 @@ while True:
     if (contract.functions.getPower == 1):
         LED = 1
         getTemp()
-        sendTemp()
+        contract.functions.sendTemp().transact
         heater()
     else:
         LED = 0
