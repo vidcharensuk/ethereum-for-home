@@ -20,7 +20,7 @@ contract ledswitch {
     }
 
     //Set power switch
-    function setPower(uint p){
+    function setPower(uint p) public{
         power = p;
     }
 
@@ -28,3 +28,5 @@ contract ledswitch {
     function getPower() public view returns(uint){
         return power;
     }
+
+}
