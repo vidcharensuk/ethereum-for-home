@@ -10,9 +10,6 @@ from web3 import Web3
 import time
 import datetime
 
-#shows status of hardware led. Will be replaced by gpio on actual device
-ledOn = False
-
 node_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(node_url))
 
@@ -28,5 +25,9 @@ contract = web3.eth.contract(address=address, abi=abi)
 print("Current Switch Status is: ", contract.functions.getSwitch().call)
 
 while True:
-    
-    contract.functions.setSwitch().transact
+    print("1: Turn On, 2: Turn Off")
+    on = input()
+    contract.functions.setSwitch(on).transact
+    web3.eth.waitForTransactionReceipt(tx_hash)
+    print("Done")
+    print("Currently: ", on)
