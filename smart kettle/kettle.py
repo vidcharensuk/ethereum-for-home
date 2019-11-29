@@ -10,8 +10,9 @@ from web3 import Web3
 import time
 import datetime
 
-#shows status of hardware led. Will be replaced by gpio on actual device
-ledOn = False
+#shows status of hardware sensor and LED. Will be replaced by gpio on actual device
+tempSensor = 0
+LED = 0
 
 node_url = "http://127.0.0.1:7545"
 web3 = Web3(Web3.HTTPProvider(node_url))
@@ -25,4 +26,18 @@ address = web3.toChecksumAddress("0xde4936DD510115B8B583C039858ABce8f76Dc531")
 
 contract = web3.eth.contract(address=address, abi=abi)  
 
+#Simulate Temperature from sensor
+def getTemp():
+    tempSensor = 70
+def heater():
+    heatOn = 1
 
+while True:
+    time.sleep(1)
+    if (contract.functions.getPower == 1):
+        LED = 1
+        getTemp()
+        sendTemp()
+        heater()
+    else:
+        LED = 0
