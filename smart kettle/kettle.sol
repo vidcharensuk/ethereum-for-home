@@ -1,6 +1,6 @@
 pragma solidity >=0.4.0 <0.7.0;
 
-contract ledswitch {
+contract kettle {
     uint temp;//temperature value
     uint limit;//upper limit value
     uint power;//set power value
