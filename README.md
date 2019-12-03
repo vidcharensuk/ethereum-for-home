@@ -26,6 +26,10 @@ If you wish to run remix-ide locally, please refer to remix-ide [repo](https://g
 You can also use the following to develop a smart contract:
 - [truffle suite](https://www.trufflesuite.com/)
 - [web3](https://web3py.readthedocs.io/en/stable/contracts.html)
+### Ethereum Node
+There are several way to test run a smart contract. [Ganache](https://www.trufflesuite.com/ganache) is one of the fastest way to run an ethereum node with just one click. After open the application, click `quick start` then copy the rpc server url to use with python web3 and for deploying a smart contract.
+
+For running a node with go-ethereum, please refer to its [repo](https://github.com/ethereum/go-ethereum).
 
 ## Run
 Run the code using:
