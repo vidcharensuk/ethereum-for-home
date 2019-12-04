@@ -27,7 +27,11 @@ print("Current Switch Status is: ", contract.functions.getSwitch().call)
 while True:
     print("1: Turn On, 2: Turn Off")
     on = input()
-    tx_hash = contract.functions.setSwitch(on).transact
+    if (on == 1):
+        switch = True
+    else:
+        switch = False
+    tx_hash = contract.functions.setSwitch(switch).transact
     web3.eth.waitForTransactionReceipt(tx_hash)
     print("Done")
-    print("Currently: ", on)
+    print("Currently: ", switch)
