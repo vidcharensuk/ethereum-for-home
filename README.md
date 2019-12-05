@@ -35,3 +35,6 @@ For running a node with go-ethereum, please refer to its [repo](https://github.c
 Run the code using:
 
 `python -3 kvstore.py` 
+
+### Proof of Authority (POA) with Geth (aka Geth-style)
+To use POA in python program, `geth_poa_middleware` needed to be included for transaction to be successful. This is the limitation of currently implemented POA in Geth. Please refer to this [wiki](https://web3py.readthedocs.io/en/stable/middleware.html#geth-style-proof-of-authority) for more information. 
