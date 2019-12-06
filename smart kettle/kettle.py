@@ -20,13 +20,13 @@ limit = 0
 power = 0
 
 #Initialization connection to ethereum node
-node_url = "http://127.0.0.1:7545"
+node_url = "http://127.0.0.1:8545"
 web3 = Web3(Web3.HTTPProvider(node_url))
 web3.eth.defaultAccount = web3.eth.accounts[0]
 #ABI for solidity contract code - change when sol is editted
 abi = json.loads('[{"constant":false,"inputs":[{"internalType":"uint256","name":"k","type":"uint256"}],"name":"setLimit","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getPower","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"t","type":"uint256"}],"name":"storeTemp","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getTemp","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"internalType":"uint256","name":"p","type":"uint256"}],"name":"setPower","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getLimit","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"temp","type":"uint256"}],"name":"overlimit","type":"event"}]')
 #contract address
-address = web3.toChecksumAddress("0x45DEaa598974ABcCa9d259e9aA5bE807e66F7519")
+address = web3.toChecksumAddress("0x068fe0F8eDCB15100574b9E9fd8d8a6452BDEA49")
 contract = web3.eth.contract(address=address, abi=abi)
 web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
@@ -45,10 +45,10 @@ def heater(x):
     global heatOn, heat, limit, power
     if(x == 1 and heat < limit):
         heat = heat + 10
+        if (heat >= 100):
+            powerOff()
     elif (x == 0 and heat > 0):
-        heat = heat - 10
-    else:
-        powerOff()
+        heat = heat - 10 
     heatOn = x
     print ("Heater: ", heatOn)
 
@@ -60,7 +60,7 @@ while True:
     power = contract.functions.getPower().call()
     print ("Power: ", power)
     print ("Limit: ", limit)
-    if (tempSensor<=100 and tempSensor>=0):
+    if (power == 0 and tempSensor<=100 and tempSensor>=0):
         contract.functions.storeTemp(tempSensor).transact()
     if (power == 1):
         LED = 1
