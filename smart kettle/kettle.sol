@@ -14,11 +14,18 @@ contract kettle {
             emit overlimit(temp);
         }
     }
+
+    function getTemp() public view returns (uint){
+        return temp;
+    }
+
     //Set upper limit to heat water
     function setLimit(uint k) public{
         limit = k;
     }
-
+    function getLimit() public view returns(uint){
+        return limit;
+    }
     //Set power switch
     function setPower(uint p) public{
         power = p;
