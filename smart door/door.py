@@ -9,6 +9,7 @@ import json
 from web3 import Web3
 import time
 import datetime
+from web3.middleware import geth_poa_middleware
 
 #shows status of hardware sensor and LED. Will be replaced by gpio on actual device.
 #Servo Motor position. 0 = unlock, 1 = lock; Button. 1 = pressed; LED. 1 = on, 0 = off;
@@ -28,6 +29,7 @@ abi = json.loads('[{"constant":false,"inputs":[{"internalType":"uint256","name":
 #contract address
 address = web3.toChecksumAddress("0xde4936DD510115B8B583C039858ABce8f76Dc531")
 contract = web3.eth.contract(address=address, abi=abi)
+web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 def runMotor():
     if (motor == 0):
@@ -43,9 +45,9 @@ def getDoorStat():
 
 def setDoorStat():
     if (motor ==1):
-        contract.functions.setDoorstat(1).transact
+        contract.functions.setDoorstat(1).transact()
     else :
-        contract.functions.setDoorStat(0).transact
+        contract.functions.setDoorStat(0).transact()
 
 while True:
     time.sleep(1)
@@ -54,6 +56,6 @@ while True:
         buttonSW = 0
         runMotor()
     setDoorStat()
-    if (contract.functions.getUidSwitch().call):
+    if (contract.functions.getUidSwitch().call()):
         buttonSW = 1
-        contract.functions.setUidSwitch(False).transact
+        contract.functions.setUidSwitch(False).transact()
