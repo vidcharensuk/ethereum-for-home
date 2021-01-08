@@ -18,7 +18,7 @@ web3.eth.defaultAccount = web3.eth.accounts[0]
 #ABI for solidity contract code - change when sol is editted
 abi = json.loads('[{"inputs":[],"name":"getSwitch","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"bool","name":"value","type":"bool"}],"name":"setSwitch","outputs":[],"stateMutability":"nonpayable","type":"function"}]')
 #contract address
-address = web3.toChecksumAddress("0x6b8589Ceffd1c766bbB6D8182DA06ADcb1039546")
+address = web3.toChecksumAddress("0xFE81CF7c07b2b6FB30a20Fe331d88d43548A9777")
 contract = web3.eth.contract(address=address, abi=abi)
 web3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
